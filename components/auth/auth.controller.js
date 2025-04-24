@@ -6,10 +6,9 @@ const sendEmailVerification = require('../../utils/sendEmailVerification')
 
 const User = require('../users/user.model')
 
-// @desc    Register user
-// @route   POST /api/v1/auth/register
-// @access  Public
-exports.register = asyncHandler(async (req, res, next) => {
+// Функция для регистрации юзера
+
+exports.register = async (req, res, next) => {
 	let { name, email, password, role } = req.body
 
 	email = email.toLowerCase()
@@ -24,11 +23,10 @@ exports.register = asyncHandler(async (req, res, next) => {
 	sendEmailVerification(user, req)
 
 	sendTokenResponse(user, 200, res)
-})
+}
 
-// @desc    Login user
-// @route   POST /api/v1/auth/login
-// @access  Public
+// Функция для авторизации юзера
+
 exports.login = asyncHandler(async (req, res, next) => {
 	let { email, password } = req.body
 
